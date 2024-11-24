@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "eceabd68-07dc-4787-8629-6cd2cab8d845",
+		"name": "To_DO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21841529"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create-user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"JohnDoe\",\r\n  \"email\": \"johndoe@example56.com\",\r\n  \"password\": \"securepassword123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						},
+						"description": "The `POST /api/auth/signup` endpoint is used to create a new user account.\n\n### Request Body\n\n- The request should include a JSON payload with the following parameters:\n    \n    - `username` (string): The username of the new user.\n        \n    - `email` (string): The email address of the new user.\n        \n    - `password` (string): The password for the new user account.\n        \n\n### Response\n\nThe response to this request will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "logOut-users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/logout/6742024469715b22996f2119",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"logout",
+								"6742024469715b22996f2119"
+							]
+						},
+						"description": "The `POST` request to `/api/auth/logout/6742024469715b22996f2119` endpoint is used to log out a user. Upon successful execution, the server returns a JSON response with a status code of 200 and a content type of `application/json`. The response body contains a JSON object with two keys: `status` and `message`. The `status` key is a boolean indicating the success of the operation, and the `message` key is a string that may contain additional information or error messages. Below is the JSON schema for the response:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "login-user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Save JWT token to global variable\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    if (response.token) {\r",
+									"        pm.globals.set(\"token\", response.token);\r",
+									"        console.log(\"JWT token saved to global variable:\", response.token);\r",
+									"    } else {\r",
+									"        pm.test(\"Token not found in response\", function () {\r",
+									"            throw new Error(\"JWT token not found in the response.\");\r",
+									"        });\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n  \"email\": \"johndoe@example5.com\",\r\n  \"password\": \"securepassword123\"\r\n  }\r\n  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "The endpoint allows users to authenticate and log in with their credentials. Upon successful authentication, the server responds with a JSON object containing a status indicator, a message, user ID, and an authentication token.\n\nThe response JSON schema is as follows:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"token\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "toDos",
+			"item": [
+				{
+					"name": "create-ToDo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Clean workspace2\",\r\n  \"description\": \"Organize desk and files.\",\r\n  \"priority\": \"high\",\r\n  \"category\": \"Personal\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/todos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"todos",
+								""
+							]
+						},
+						"description": "# Create a New Todo\n\nThis endpoint allows the client to create a new todo item.\n\n## Request\n\n- Method: POST\n    \n- URL: `http://localhost:5000/api/todos/`\n    \n\n### Request Body\n\n- Type: Raw (application/json)\n    \n    - `title`: (string) The title of the todo item.\n        \n    - `description`: (string) Details about the todo item.\n        \n    - `priority`: (string) Priority level of the todo item.\n        \n    - `category`: (string) Category of the todo item.\n        \n\nExample:\n\n``` json\n{\n    \"title\": \"Clean workspace2\",\n    \"description\": \"Organize desk and files.\",\n    \"priority\": \"high\",\n    \"category\": \"Personal\"\n}\n## Response\n- Status: 201\n- Content-Type: application/json\nExample:\n```json\n{\n    \"status\": true,\n    \"message\": \"\",\n    \"newTodo\": {\n        \"userId\": \"\",\n        \"title\": \"\",\n        \"description\": \"\",\n        \"priority\": \"\",\n        \"status\": \"\",\n        \"category\": \"\",\n        \"isDeleted\": true,\n        \"_id\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    }\n}\n\n ```\n\nThis endpoint allows you to create a new todo item.\n\n#### Request Body\n\n- title (string, required): The title of the todo item.\n    \n- description (string, required): Description of the todo item.\n    \n- priority (string, required): Priority level of the todo item.\n    \n- category (string, required): Category of the todo item.\n    \n\n#### Response (JSON Schema)\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"newTodo\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"userId\": {\n                    \"type\": \"string\"\n                },\n                \"title\": {\n                    \"type\": \"string\"\n                },\n                \"description\": {\n                    \"type\": \"string\"\n                },\n                \"priority\": {\n                    \"type\": \"string\"\n                },\n                \"status\": {\n                    \"type\": \"string\"\n                },\n                \"category\": {\n                    \"type\": \"string\"\n                },\n                \"isDeleted\": {\n                    \"type\": \"boolean\"\n                },\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"createdAt\": {\n                    \"type\": \"string\"\n                },\n                \"updatedAt\": {\n                    \"type\": \"string\"\n                },\n                \"__v\": {\n                    \"type\": \"number\"\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "update-ToDo-Byid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Buy groceries2\",\r\n  \"description\": \"Milk, Eggs, Bread, Butter\",\r\n  \"dueDate\": \"2024-11-31\",\r\n  \"priority\": \"high\",\r\n  \"category\": \"Personal\",\r\n  \"status\": \"completed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/todos/6743205c00b7d2888917c977",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"todos",
+								"6743205c00b7d2888917c977"
+							]
+						},
+						"description": "### HTTP PATCH Request to Update Todo Item\n\nThis endpoint is used to update a specific todo item by making an HTTP PATCH request to the specified URL.\n\n#### Request Body\n\nThe request should include a JSON payload with the updated values for the todo item, including the following parameters:\n\n- `title` (string): The updated title of the todo item.\n    \n- `description` (string): The updated description of the todo item.\n    \n- `dueDate` (string): The updated due date of the todo item.\n    \n- `priority` (string): The updated priority of the todo item.\n    \n- `category` (string): The updated category of the todo item.\n    \n- `status` (string): The updated status of the todo item.\n    \n\nExample:\n\n``` json\n{\n  \"title\": \"Buy groceries2\",\n  \"description\": \"Milk, Eggs, Bread, Butter\",\n  \"dueDate\": \"2024-11-31\",\n  \"priority\": \"high\",\n  \"category\": \"Personal\",\n  \"status\": \"completed\"\n}\n\n ```\n\n#### Response\n\nUpon successful execution, the response will have a status code of 200 and a JSON schema representing the updated todo item. The schema will include the properties of the todo item, such as title, description, due date, priority, category, status, along with their respective data types.\n\nExample Response:\n\n``` json\n{\n  \"status\": true,\n  \"message\": \"\",\n  \"todo\": {\n    \"_id\": \"\",\n    \"userId\": \"\",\n    \"title\": \"\",\n    \"description\": \"\",\n    \"priority\": \"\",\n    \"status\": \"\",\n    \"category\": \"\",\n    \"isDeleted\": true,\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"__v\": 0,\n    \"dueDate\": \"\"\n  }\n}\n\n ```\n\nThis endpoint is used to update a specific todo item by making an HTTP PATCH request to the specified todo ID.\n\n#### Request Body\n\nThe request should include a JSON payload with the updated values for the todo item, including the following fields:\n\n- `title` (string): The updated title of the todo item.\n    \n- `description` (string): The updated description of the todo item.\n    \n- `dueDate` (string): The updated due date of the todo item.\n    \n- `priority` (string): The updated priority of the todo item.\n    \n- `category` (string): The updated category of the todo item.\n    \n- `status` (string): The updated status of the todo item.\n    \n\n#### Response\n\nUpon successful execution, the response will have a status code of 200 and a content type of `application/json`. The response body will contain a JSON object with the updated todo item, including the properties:\n\n- `title` (string): The title of the todo item.\n    \n- `description` (string): The description of the todo item.\n    \n- `dueDate` (string): The due date of the todo item.\n    \n- `priority` (string): The priority of the todo item.\n    \n- `category` (string): The category of the todo item.\n    \n- `status` (string): The status of the todo item.\n    \n\nTo save a specific field from the response to a variable, you can extract the desired field (e.g., `title`) from the response and assign it to a variable in your code for further processing.\n\n### Response\n\nThe response of this request is a JSON schema representing the updated todo item. The schema will include the properties of the todo item, such as title, description, due date, priority, category, and status, along with their respective data types."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All todos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/todos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"todos",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Personal2",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "pending",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "high",
+									"disabled": true
+								},
+								{
+									"key": "dueDate",
+									"value": "2024-11-20",
+									"disabled": true
+								},
+								{
+									"key": "nearDueDate",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						},
+						"description": "The endpoint retrieves a list of todos.\n\nThe response of this request can be documented as a JSON schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"totalCount\": {\n      \"type\": \"integer\"\n    },\n    \"currentPage\": {\n      \"type\": \"integer\"\n    },\n    \"totalPages\": {\n      \"type\": \"integer\"\n    },\n    \"todos\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"userId\": {\n            \"type\": \"string\"\n          },\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"priority\": {\n            \"type\": \"string\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          },\n          \"category\": {\n            \"type\": \"string\"\n          },\n          \"isDeleted\": {\n            \"type\": \"boolean\"\n          },\n          \"createdAt\": {\n            \"type\": \"string\"\n          },\n          \"updatedAt\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"integer\"\n          }\n        },\n        \"required\": [\"_id\", \"userId\", \"title\", \"description\", \"priority\", \"status\", \"category\", \"isDeleted\", \"createdAt\", \"updatedAt\", \"__v\"]\n      }\n    }\n  },\n  \"required\": [\"status\", \"message\", \"totalCount\", \"currentPage\", \"totalPages\", \"todos\"]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-todo ById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDIwMjQ0Njk3MTViMjI5OTZmMjExOSIsImlhdCI6MTczMjQyODE3OCwiZXhwIjoxNzMzNTA4MTc4fQ.k09g05C3mjJouG-AjRyzjD5M6NquBnp3gv7i3zSy3pY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/todos/674209b13bdabd66eb60266d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"todos",
+								"674209b13bdabd66eb60266d"
+							]
+						},
+						"description": "This endpoint sends an HTTP DELETE request to delete a specific todo item. The response of this request is a JSON schema."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
