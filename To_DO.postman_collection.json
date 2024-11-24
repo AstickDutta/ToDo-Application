@@ -27,19 +27,20 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/auth/signup",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/auth/signup",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"auth",
 								"signup"
 							]
 						},
-						"description": "The `POST /api/auth/signup` endpoint is used to create a new user account.\n\n### Request Body\n\n- The request should include a JSON payload with the following parameters:\n    \n    - `username` (string): The username of the new user.\n        \n    - `email` (string): The email address of the new user.\n        \n    - `password` (string): The password for the new user account.\n        \n\n### Response\n\nThe response to this request will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+						"description": "The `POST /api/auth/signup` endpoint is used to create a new user account in the todo application.\n\n### Request Body\n\n- The request body should be in JSON format and include the following parameters:\n    \n    - `username` (string): The username of the new user.\n        \n    - `email` (string): The email address of the new user.\n        \n    - `password` (string): The password for the new user's account.\n        \n\nExample:\n\n``` json\n{\n  \"username\": \"JohnDoe\",\n  \"email\": \"johndoe@example56.com\",\n  \"password\": \"securepassword123\"\n}\n\n ```\n\n### Response (201 - Created)\n\nThe response to this request will be in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\n### Request Body\n\n- The request should include a JSON payload with the following parameters:\n    \n    - `username` (string): The username of the new user.\n        \n    - `email` (string): The email address of the new user.\n        \n    - `password` (string): The password for the new user account.\n        \n\n### Response\n\nThe response to this request will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -59,12 +60,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/auth/logout/6742024469715b22996f2119",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/auth/logout/6742024469715b22996f2119",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"auth",
@@ -72,7 +74,7 @@
 								"6742024469715b22996f2119"
 							]
 						},
-						"description": "The `POST` request to `/api/auth/logout/6742024469715b22996f2119` endpoint is used to log out a user. Upon successful execution, the server returns a JSON response with a status code of 200 and a content type of `application/json`. The response body contains a JSON object with two keys: `status` and `message`. The `status` key is a boolean indicating the success of the operation, and the `message` key is a string that may contain additional information or error messages. Below is the JSON schema for the response:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+						"description": "This endpoint is used to log out the user from the todo application. Upon successful execution of the HTTP POST request, the server returns a JSON response with a status code of 200 and a content type of application/json. The response schema is as follows:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -114,19 +116,20 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/auth/login",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/auth/login",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"auth",
 								"login"
 							]
 						},
-						"description": "The endpoint allows users to authenticate and log in with their credentials. Upon successful authentication, the server responds with a JSON object containing a status indicator, a message, user ID, and an authentication token.\n\nThe response JSON schema is as follows:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"token\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+						"description": "### POST /api/auth/login\n\nThis endpoint is used to authenticate a user and obtain an access token for further API requests.\n\n#### Request Body Parameters\n\n- `email` (string) - The email address of the user.\n    \n- `password` (string) - The password for the user account.\n    \n\n#### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"id\": {\n            \"type\": \"string\"\n        },\n        \"token\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```\n\nThe response JSON schema is as follows:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"boolean\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"token\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
 					},
 					"response": []
 				}
@@ -160,14 +163,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/todos/",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.comapi/todos/",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"comapi"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"todos",
 								""
 							]
@@ -213,12 +216,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/todos/6743205c00b7d2888917c977",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/todos/6743205c00b7d2888917c977",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"todos",
@@ -257,12 +261,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/todos/",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/todos/",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"todos",
@@ -308,7 +313,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDIwMjQ0Njk3MTViMjI5OTZmMjExOSIsImlhdCI6MTczMjQyODE3OCwiZXhwIjoxNzMzNTA4MTc4fQ.k09g05C3mjJouG-AjRyzjD5M6NquBnp3gv7i3zSy3pY",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -325,16 +330,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/todos/674209b13bdabd66eb60266d",
-							"protocol": "http",
+							"raw": "https://todo-application-wdyz.onrender.com/api/todos/67431fd037839167eb103954",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"todo-application-wdyz",
+								"onrender",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"api",
 								"todos",
-								"674209b13bdabd66eb60266d"
+								"67431fd037839167eb103954"
 							]
 						},
 						"description": "This endpoint sends an HTTP DELETE request to delete a specific todo item. The response of this request is a JSON schema."
